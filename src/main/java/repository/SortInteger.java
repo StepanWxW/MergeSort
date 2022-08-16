@@ -4,34 +4,10 @@ import java.util.ArrayList;
 
 
 public class SortInteger {
-    ArrayList<Integer> a1 = new ArrayList<>();
 
-    public ArrayList<Integer> getA1() {
-        a1.add(1);
-        a1.add(5);
-        a1.add(10);
-
-
-        return a2;
-    }
-
-    ArrayList<Integer> a2 = new ArrayList<>();
-
-    public ArrayList<Integer> getA2() {
-        a2.add(3);
-        a2.add(5);
-        a2.add(11);
-        a2.add(15);
-        a2.add(111);
-        a2.add(26);
-        return a2;
-    }
-
-    ArrayList<Integer> a3 = new ArrayList<>();
-    int i = 0, j = 0, b = 0, a;
-
-    public void sorted() {
-
+    public ArrayList<Integer> sorted(ArrayList<Integer> a1, ArrayList<Integer> a2) {
+        int i = 0, j = 0, b = 0, a;
+        ArrayList<Integer> a3 = new ArrayList<>();
         while (i < a1.size() && j < a2.size()) {
             a = a1.get(i) < a2.get(j) ? a1.get(i++) : a2.get(j++);
             if (a >= b) {
@@ -56,6 +32,6 @@ public class SortInteger {
                 j++;
             }
         }
-            System.out.println(a3);
+            return a3;
         }
     }
