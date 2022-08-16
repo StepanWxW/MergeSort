@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class OpenFile {
-    public ArrayList<Integer> openFile(File fileName) {
+    public ArrayList<Integer> getFile(File fileName) {
         ArrayList<Integer> arrayList = new ArrayList<>();
         try {
             Scanner scanner = new Scanner(fileName);

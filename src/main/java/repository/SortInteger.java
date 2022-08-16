@@ -25,12 +25,13 @@ public class SortInteger {
             }
         }
         while (j < a2.size()) {
-            if (a2.get(j) > a3.get(a3.size() - 1)) {
-                a3.add(a2.get(j++));
-            }
-            else {
-                j++;
-            }
+            if(a3.size() != 0) {
+                if (a2.get(j) > a3.get(a3.size() - 1)) {
+                    a3.add(a2.get(j++));
+                } else {
+                    j++;
+                }
+            } else a3.add(a2.get(j++));
         }
             return a3;
         }
