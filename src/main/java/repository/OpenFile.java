@@ -3,6 +3,7 @@ package repository;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class OpenFile {
@@ -11,8 +12,11 @@ public class OpenFile {
         try {
             Scanner scanner = new Scanner(fileName);
             while (scanner.hasNextLine()) {
-                Integer line = Integer.valueOf(scanner.nextLine());
-                arrayList.add(line);
+                String s = scanner.nextLine();
+                if (!Objects.equals(s, "")) {
+                    Integer line = Integer.valueOf(s);
+                    arrayList.add(line);
+                } else System.out.println("The file has an empty line");
             }
         } catch (FileNotFoundException e) {
             System.out.println("Couldn't open file" + e);
