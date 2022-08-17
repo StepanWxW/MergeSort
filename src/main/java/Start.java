@@ -13,12 +13,12 @@ public class Start {
         SortInteger sortInteger = new SortInteger();
         SortString sortString = new SortString();
         ReadWriteFile readWriteFile = new ReadWriteFile();
-        args[0] = "-a";
+        args[0] = "-d";
         args[1] = "-s";
 //        new Scanner(System.in).nextLine()
         args[2] = "-out.txt";
-        args[3] = "src/main/st1.txt";
-        args[4] = "src/main/st2.txt";
+        args[3] = "src/main/1st1.txt";
+        args[4] = "src/main/1st2.txt";
         ArrayList<Integer> a2 = new ArrayList<>();
         ArrayList<String> s2 = new ArrayList<>();
         String string1 = args[0];
