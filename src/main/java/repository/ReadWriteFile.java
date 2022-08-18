@@ -16,9 +16,14 @@ public class ReadWriteFile {
             while (scanner.hasNextLine()) {
                 String s = scanner.nextLine();
                 if (!Objects.equals(s, "")) {
-                    Integer line = Integer.valueOf(s);
-                    arrayList.add(line);
-
+                    if(!s.contains(" ")) {
+                        Integer line = Integer.valueOf(s);
+                        arrayList.add(line);
+                    }
+                        else {
+                            System.out.println("File: " + fileName + " contains an empty character." +
+                                    " This line has not been taken into account.");
+                        }
                 } else System.out.println("The file " +fileName + " has an empty line. ");
             }
         } catch (FileNotFoundException e) {
@@ -33,7 +38,12 @@ public class ReadWriteFile {
             while (scanner.hasNextLine()) {
                 String s = scanner.nextLine();
                 if (!Objects.equals(s, "")) {
-                    arrayList.add(s);
+                    if(!s.contains(" ")) {
+                        arrayList.add(s);
+                    } else {
+                        System.out.println("File: " + fileName + " contains an empty character." +
+                                " This line has not been taken into account.");
+                    }
                 } else System.out.println("The file has an empty line");
             }
         } catch (FileNotFoundException e) {
