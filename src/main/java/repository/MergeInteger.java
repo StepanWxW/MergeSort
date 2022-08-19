@@ -12,9 +12,43 @@ public class MergeInteger {
             String line2 = br2.readLine();
             Integer int1 = null;
             Integer int2 = null;
-            if (line1 != null) { //проверка на пустой файл
-                int1 = Integer.parseInt(line1);
-            } else { // файл пуст то этот код копируем второй файл
+            int1 = checkForNullAsc(line1, int1, int2, writer, br1,br2);
+            int2 = checkForNullAsc(line2, int2, int1, writer, br2, br1);
+
+            while (int1 != null && int2 != null) {
+                while (int1 != null && int1 <= int2) {
+                    writer.write(int1 + "\n");
+                    writer.flush();
+                    String line11 = br1.readLine();
+                    int1 = checkForNullAsc(line11, int1, int2, writer, br1,br2);
+                }
+                while ((int2) != null && (int1) != null && int1 > int2) {
+                    writer.write(int2 + "\n");
+                    writer.flush();
+                    String line22 = br2.readLine();
+                    int2 = checkForNullAsc(line22, int2, int1, writer, br2, br1);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+    private Integer checkForNullAsc (String line1, Integer int1, Integer int2, BufferedWriter writer,BufferedReader br1, BufferedReader br2) throws IOException {
+        try {
+            if (line1 != null) {
+                while (line1.contains(" ")) {
+                    line1 = br1.readLine();
+                }
+                Integer in1False = Integer.valueOf(line1);
+                if (int1 != null) {
+                    while (in1False < int1 || line1.contains(" ")) {
+                        line1 = br1.readLine();
+                        in1False = Integer.valueOf(line1);
+                    }
+                }
+                int1 = in1False;
+
+            } else {
                 while ((int2) != null) {
                     writer.write(int2 + "\n");
                     writer.flush();
@@ -34,103 +68,11 @@ public class MergeInteger {
                     int1 = null;
                 }
             }
-            if (line2 != null) { // проверяем второй файл на пустоту
-                int2 = Integer.parseInt(line2);
-            } else {
-                while ((int1) != null) {
-                    writer.write(int1 + "\n");
-                    writer.flush();
-                    String line11 = br1.readLine();
-                    if (line11 != null) {
-                        while (line11.contains(" ")) {
-                            line11 = br1.readLine();
-                        }
-                        Integer in1False = Integer.valueOf(line11);
-                        while (in1False < int1 || line11.contains(" ")) {
-                            line11 = br1.readLine();
-                            in1False = Integer.valueOf(line11);
-                        }
-                        int1 = in1False;
-                    } else
-                        int1 = null;
-                    int2 = null;
-                }
-            }
-            // пошло основное действие.
-            while (int1 != null || int2 != null) {
-
-                while ((int1) != null && int1 <= int2) {
-                    writer.write(int1 + "\n");
-                    writer.flush();
-                    String line11 = br1.readLine();
-                    if (line11 != null) {
-                        while (line11.contains(" ")) {
-                            line11 = br1.readLine();
-                        }
-                        Integer in1False = Integer.valueOf(line11);
-                        while (in1False < int1 || line11.contains(" ")) {
-                            line11 = br1.readLine();
-                            in1False = Integer.valueOf(line11);
-                        }
-                        int1 = in1False;
-                    } else
-                        while ((int2) != null) {
-                            writer.write(int2 + "\n");
-                            writer.flush();
-                            String line22 = br2.readLine();
-                            if (line22 != null) {
-                                while (line22.contains(" ")) {
-                                    line22 = br2.readLine();
-                                }
-                                Integer in2False = Integer.valueOf(line22);
-                                while (in2False < int2 || line22.contains(" ")) {
-                                    line22 = br2.readLine();
-                                    in2False = Integer.valueOf(line22);
-                                }
-                                int2 = in2False;
-                            } else
-                                int2 = null;
-                            int1 = null;
-                        }
-                }
-                while ((int2) != null && int1 > int2) {
-                    writer.write(int2 + "\n");
-                    writer.flush();         // запушили в файл
-                    String line22 = br2.readLine();         // читаем следующую сроку затем проверка
-                    if (line22 != null) {                   // на пустой пробел и
-                        while (line22.contains(" ")) {
-                            line22 = br2.readLine();
-                        }
-                        Integer in2False = Integer.valueOf(line22);     // проверка на то чтобы прочитанная строка
-                        while (in2False < int2 || line22.contains(" ")) {   // была больше записанного последнего чисда
-                            line22 = br2.readLine();            // если меньше, то снова читаем, проверяем на пустой и на больге или нет
-                            in2False = Integer.valueOf(line22);
-                        }
-                        int2 = in2False;        // если пробела нет и число больше, записываем его в рабочее в число.
-                    } else      // если файл первый кончился выполняется дальнейшая перезапись второго файла.
-                        while ((int1) != null) {
-                            writer.write(int1 + "\n");
-                            writer.flush();
-                            String line11 = br1.readLine();
-                            if (line11 != null) {
-                                while (line11.contains(" ")) {
-                                    line11 = br1.readLine();
-                                }
-                                Integer in1False = Integer.valueOf(line11);
-                                while (in1False < int1 || line11.contains(" ")) {
-                                    line11 = br1.readLine();
-                                    in1False = Integer.valueOf(line11);
-                                }
-                                int1 = in1False;
-                            } else
-                                int1 = null;
-                            int2 = null;
-                        }
-                }
-            }
-        } catch (IOException e) {
-            System.out.println(e);
+            return int1;
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter file with integer.");
         }
+        return null;
     }
 
     public void MergeDescending(File fileName1, File fileName2, File fileName3) {
@@ -141,9 +83,43 @@ public class MergeInteger {
             String line2 = br2.readLine();
             Integer int1 = null;
             Integer int2 = null;
-            if (line1 != null) { //проверка на пустой файл
-                int1 = Integer.parseInt(line1);
-            } else { // файл пуст то этот код копируем второй файл
+            int1 = checkForNullDes(line1, int1, int2, writer, br1,br2);
+            int2 = checkForNullDes(line2, int2, int1, writer, br2, br1);
+
+            while (int1 != null && int2 != null) {
+                while (int1 != null && int1 >= int2) {
+                    writer.write(int1 + "\n");
+                    writer.flush();
+                    String line11 = br1.readLine();
+                    int1 = checkForNullDes(line11, int1, int2, writer, br1,br2);
+                }
+                while ((int2) != null && (int1) != null && int1 < int2) {
+                    writer.write(int2 + "\n");
+                    writer.flush();
+                    String line22 = br2.readLine();
+                    int2 = checkForNullDes(line22, int2, int1, writer, br2, br1);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+    private Integer checkForNullDes (String line1, Integer int1, Integer int2, BufferedWriter writer,BufferedReader br1, BufferedReader br2) throws IOException {
+        try {
+            if (line1 != null) {
+                while (line1.contains(" ")) {
+                    line1 = br1.readLine();
+                }
+                Integer in1False = Integer.valueOf(line1);
+                if (int1 != null) {
+                    while (in1False > int1 || line1.contains(" ")) {
+                        line1 = br1.readLine();
+                        in1False = Integer.valueOf(line1);
+                    }
+                }
+                int1 = in1False;
+
+            } else {
                 while ((int2) != null) {
                     writer.write(int2 + "\n");
                     writer.flush();
@@ -163,103 +139,12 @@ public class MergeInteger {
                     int1 = null;
                 }
             }
-            if (line2 != null) { // проверяем второй файл на пустоту
-                int2 = Integer.parseInt(line2);
-            } else {
-                while ((int1) != null) {
-                    writer.write(int1 + "\n");
-                    writer.flush();
-                    String line11 = br1.readLine();
-                    if (line11 != null) {
-                        while (line11.contains(" ")) {
-                            line11 = br1.readLine();
-                        }
-                        Integer in1False = Integer.valueOf(line11);
-                        while (in1False > int1 || line11.contains(" ")) {
-                            line11 = br1.readLine();
-                            in1False = Integer.valueOf(line11);
-                        }
-                        int1 = in1False;
-                    } else
-                        int1 = null;
-                    int2 = null;
-                }
-            }
-            // пошло основное действие.
-            while (int1 != null || int2 != null) {
-
-                while ((int1) != null && int1 >= int2) {
-                    writer.write(int1 + "\n");
-                    writer.flush();
-                    String line11 = br1.readLine();
-                    if (line11 != null) {
-                        while (line11.contains(" ")) {
-                            line11 = br1.readLine();
-                        }
-                        Integer in1False = Integer.valueOf(line11);
-                        while (in1False > int1 || line11.contains(" ")) {
-                            line11 = br1.readLine();
-                            in1False = Integer.valueOf(line11);
-                        }
-                        int1 = in1False;
-                    } else
-                        while ((int2) != null) {
-                            writer.write(int2 + "\n");
-                            writer.flush();
-                            String line22 = br2.readLine();
-                            if (line22 != null) {
-                                while (line22.contains(" ")) {
-                                    line22 = br2.readLine();
-                                }
-                                Integer in2False = Integer.valueOf(line22);
-                                while (in2False > int2 || line22.contains(" ")) {
-                                    line22 = br2.readLine();
-                                    in2False = Integer.valueOf(line22);
-                                }
-                                int2 = in2False;
-                            } else
-                                int2 = null;
-                            int1 = null;
-                        }
-                }
-                while ((int2) != null && int1 < int2) {
-                    writer.write(int2 + "\n");
-                    writer.flush();         // запушили в файл
-                    String line22 = br2.readLine();         // читаем следующую сроку затем проверка
-                    if (line22 != null) {                   // на пустой пробел и
-                        while (line22.contains(" ")) {
-                            line22 = br2.readLine();
-                        }
-                        Integer in2False = Integer.valueOf(line22);     // проверка на то чтобы прочитанная строка
-                        while (in2False > int2 || line22.contains(" ")) {   // была больше записанного последнего чисда
-                            line22 = br2.readLine();            // если меньше, то снова читаем, проверяем на пустой и на больге или нет
-                            in2False = Integer.valueOf(line22);
-                        }
-                        int2 = in2False;        // если пробела нет и число больше, записываем его в рабочее в число.
-                    } else      // если файл первый кончился выполняется дальнейшая перезапись второго файла.
-                        while ((int1) != null) {
-                            writer.write(int1 + "\n");
-                            writer.flush();
-                            String line11 = br1.readLine();
-                            if (line11 != null) {
-                                while (line11.contains(" ")) {
-                                    line11 = br1.readLine();
-                                }
-                                Integer in1False = Integer.valueOf(line11);
-                                while (in1False > int1 || line11.contains(" ")) {
-                                    line11 = br1.readLine();
-                                    in1False = Integer.valueOf(line11);
-                                }
-                                int1 = in1False;
-                            } else
-                                int1 = null;
-                            int2 = null;
-                        }
-                }
-            }
-        } catch (IOException e) {
-            System.out.println(e);
+            return int1;
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter file with integer.");
         }
+        return null;
     }
+
 }
 

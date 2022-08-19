@@ -1,4 +1,4 @@
-Cow
+cow
 drink
 milk
 abc

@@ -1,18 +1,17 @@
 import repository.MergeInteger;
+import repository.MergeString;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 
 public class Start {
 
     public static void main(String[] args) {
         args = new String[5];
         MergeInteger mergeInteger = new MergeInteger();
+        MergeString mergeString = new MergeString();
         args[0] = "-d";
         args[1] = "-i";
         args[2] = "-out.txt";
@@ -27,8 +26,25 @@ public class Start {
             b++;
             if (string2.equals("-s")) {
 //                сортируем по возрастанию стринг
-
+                b++;
+                String fileName = args[b - 1];
+                //создаем пустой файл. Для сортировки если , пришел всего 1 файл
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter("1.txt"))) {
+                    writer.flush();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                // первая сортировка пустого и нашего файла
+                mergeString.MergeAscending(new File(args[b]), new File("1.txt"), new File(fileName));
+                // все последующие файлы
+                for (int j = b + 1; j < args.length; j++) {
+                    mergeString.MergeAscending(new File(fileName), new File(args[j]), new File("1.txt"));
+                    new File(fileName).delete();
+                    new File("1.txt").renameTo(new File(fileName));
+                }
+                new File("1.txt").delete();
             }
+
             if (string2.equals("-i")) {
 //                сортируем по возрастанию интеджер
                 b++;
@@ -49,42 +65,59 @@ public class Start {
                 }
                 new File("1.txt").delete();
             }
-        }else if (string1.equals("-d")) {
-                    b++;
-                    if (string2.equals("-s")) {
-                        b++;
+        } else if (string1.equals("-d")) {
+            b++;
+            if (string2.equals("-s")) {
+                b++;
 //                сортируем по убыванию стринг
-
-                    }
-                    if (string2.equals("-i")) {
+                String fileName = args[b - 1];
+                //создаем пустой файл. Для сортировки если , пришел всего 1 файл
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter("1.txt"))) {
+                    writer.flush();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                // первая сортировка пустого и нашего файла
+                mergeString.MergeDescending(new File(args[b]), new File("1.txt"), new File(fileName));
+                // все последующие файлы
+                for (int j = b + 1; j < args.length; j++) {
+                    mergeString.MergeDescending(new File(fileName), new File(args[j]), new File("1.txt"));
+                    new File(fileName).delete();
+                    new File("1.txt").renameTo(new File(fileName));
+                }
+                new File("1.txt").delete();
+            }
+        }
+        if (string2.equals("-i")) {
 //                сортируем убыванию интеджер
-                        b++;
-                        String fileName = args[b - 1];
-                        //создаем пустой файл. Для сортировки если , пришел всего 1 файл
-                        try (BufferedWriter writer = new BufferedWriter(new FileWriter("1.txt"))){
-                            writer.flush();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                        // первая сортировка пустого и нашего файла
-                        mergeInteger.MergeDescending(new File(args[b]), new File("1.txt"), new File(fileName));
-                        // все последующие файлы
-                        for (int j = b + 1; j < args.length; j++) {
-                            mergeInteger.MergeDescending(new File(fileName), new File(args[j]), new File("1.txt"));
-                            new File(fileName).delete();
-                            new File("1.txt").renameTo(new File(fileName));
-                        }
-                        new File("1.txt").delete();
-                    }
-                } else if (string1.equals("-s")) {
+            b++;
+            String fileName = args[b - 1];
+            //создаем пустой файл. Для сортировки если , пришел всего 1 файл
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("1.txt"))) {
+                writer.flush();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            // первая сортировка пустого и нашего файла
+            mergeInteger.MergeDescending(new File(args[b]), new File("1.txt"), new File(fileName));
+            // все последующие файлы
+            for (int j = b + 1; j < args.length; j++) {
+                mergeInteger.MergeDescending(new File(fileName), new File(args[j]), new File("1.txt"));
+                new File(fileName).delete();
+                new File("1.txt").renameTo(new File(fileName));
+            }
+            new File("1.txt").delete();
+
+        } else if (string1.equals("-s")) {
 //            сортируем по возрастанию стринги
-                    b++;
+            b++;
 
-                } else if (string1.equals("-i")) {
+        } else if (string1.equals("-i")) {
 //            сортируем по возрастанию интежеры
-                    b++;
+            b++;
 
-                } else {
+        }
+    else {
                     System.out.println("Please enter in order:" +
                             "\n1.) \"-a\" - ascending sort, \"-d\" - descending sort  (This parameter is optional, the default is ascending)" +
                             "\n2.) \"-s\" - string sorting, \"-i\" - integer sorting" +
