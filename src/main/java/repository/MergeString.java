@@ -16,11 +16,11 @@ public class MergeString {
             checkForNullAsc(line1Char, line2Char, writer, br1);
 
             while (line1Char != null && line2Char != null) {
-                while (compareAsc(line2Char, line1Char)) { /// сравниваем первый и массив второй, какой больше, если первый то тру.
+                while (compareAsc(line2Char, line1Char)) {
                     writer.write(String.valueOf(line1Char) + "\n");
                     writer.flush();
                     char[] line1CharCheck = conversion(br1.readLine(), br1);
-                    while (compareAsc(line1Char, line1CharCheck)) { // делаем проверку, с уже записсанными данными
+                    while (compareAsc(line1Char, line1CharCheck)) {
                         line1CharCheck = conversion(br1.readLine(), br1);
                     }
                     line1Char = line1CharCheck;
@@ -30,7 +30,7 @@ public class MergeString {
                     writer.write(String.valueOf(line2Char) + "\n");
                     writer.flush();
                     char[] line2CharCheck = conversion(br2.readLine(), br2);
-                    while (compareAsc(line2Char, line2CharCheck)) { // делаем проверку, с уже записсанными данными
+                    while (compareAsc(line2Char, line2CharCheck)) {
                         line2CharCheck = conversion(br2.readLine(), br2);
                     }
                     line2Char = line2CharCheck;
@@ -38,18 +38,23 @@ public class MergeString {
                 }
             }
         } catch (IOException e) {
-            System.out.println(e);;
+            System.out.println("Problem with files");;
         }
     }
     private boolean compareAsc(char[] on1, char[] on2) {
-        if (on1 == null) return false;
-        if (on2 == null) return false;
-        for (int s = 0; s < on1.length || s < on2.length; s++) {
-            if (on1 [s] > on2 [s]) {
-                return true;
-            } else if (on1 [s] < on2 [s]) {
-                return false;
+        try {
+            if (on1 == null) return false;
+            if (on2 == null) return false;
+            for (int s = 0; s < on1.length || s < on2.length; s++) {
+                if (on1[s] > on2[s]) {
+                    return true;
+                } else if (on1[s] < on2[s]) {
+                    return false;
+                }
             }
+            return true;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Please enter file with String. The program will not exit correctly.");
         }
         return true;
     }
@@ -90,11 +95,11 @@ public class MergeString {
             checkForNullDes(line1Char, line2Char, writer, br1);
 
             while (line1Char != null && line2Char != null) {
-                while (compareDes(line2Char, line1Char)) { /// сравниваем первый и массив второй, какой больше, если первый то тру.
+                while (compareDes(line2Char, line1Char)) {
                     writer.write(String.valueOf(line1Char) + "\n");
                     writer.flush();
                     char[] line1CharCheck = conversion(br1.readLine(), br1);
-                    while (compareDes(line1Char, line1CharCheck)) { // делаем проверку, с уже записсанными данными
+                    while (compareDes(line1Char, line1CharCheck)) {
                         line1CharCheck = conversion(br1.readLine(), br1);
                     }
                     line1Char = line1CharCheck;
@@ -104,7 +109,7 @@ public class MergeString {
                     writer.write(String.valueOf(line2Char) + "\n");
                     writer.flush();
                     char[] line2CharCheck = conversion(br2.readLine(), br2);
-                    while (compareDes(line2Char, line2CharCheck)) { // делаем проверку, с уже записсанными данными
+                    while (compareDes(line2Char, line2CharCheck)) {
                         line2CharCheck = conversion(br2.readLine(), br2);
                     }
                     line2Char = line2CharCheck;
@@ -112,7 +117,7 @@ public class MergeString {
                 }
             }
         } catch (IOException e) {
-            System.out.println(e);;
+            System.out.println("Problem with files");;
         }
     }
     private void checkForNullDes(char[] line1, char[] line2, BufferedWriter writer, BufferedReader br) throws IOException {
@@ -129,14 +134,19 @@ public class MergeString {
         }
     }
     private boolean compareDes(char[] on1, char[] on2) {
-        if (on1 == null) return false;
-        if (on2 == null) return false;
-        for (int s = 0; s < on1.length || s < on2.length; s++) {
-            if (on1 [s] < on2 [s]) {
-                return true;
-            } else if (on1 [s] > on2 [s]) {
-                return false;
+        try {
+            if (on1 == null) return false;
+            if (on2 == null) return false;
+            for (int s = 0; s < on1.length || s < on2.length; s++) {
+                if (on1[s] < on2[s]) {
+                    return true;
+                } else if (on1[s] > on2[s]) {
+                    return false;
+                }
             }
+            return true;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Please enter file with String. The program will not exit correctly.");
         }
         return true;
     }

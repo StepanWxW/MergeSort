@@ -30,7 +30,7 @@ public class MergeInteger {
                 }
             }
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println("Problem with files");
         }
     }
     private Integer checkForNullAsc (String line1, Integer int1, Integer int2, BufferedWriter writer,BufferedReader br1, BufferedReader br2) throws IOException {
@@ -70,7 +70,7 @@ public class MergeInteger {
             }
             return int1;
         } catch (NumberFormatException e) {
-            System.out.println("Please enter file with integer.");
+            System.out.println("Please enter file with integer. The program will not exit correctly.");
         }
         return null;
     }
@@ -101,7 +101,7 @@ public class MergeInteger {
                 }
             }
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println("Problem with files");
         }
     }
     private Integer checkForNullDes (String line1, Integer int1, Integer int2, BufferedWriter writer,BufferedReader br1, BufferedReader br2) throws IOException {
@@ -141,7 +141,7 @@ public class MergeInteger {
             }
             return int1;
         } catch (NumberFormatException e) {
-            System.out.println("Please enter file with integer.");
+            System.out.println("Please enter file with integer. The program will not exit correctly.");
         }
         return null;
     }
