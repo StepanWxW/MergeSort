@@ -12,7 +12,7 @@ public class MergeInteger {
             String line2 = br2.readLine();
             Integer int1 = null;
             Integer int2 = null;
-            int1 = checkForNullAsc(line1, int1, int2, writer, br1,br2);
+            int1 = checkForNullAsc(line1, int1, int2, writer, br1, br2);
             int2 = checkForNullAsc(line2, int2, int1, writer, br2, br1);
 
             while (int1 != null && int2 != null) {
@@ -20,7 +20,7 @@ public class MergeInteger {
                     writer.write(int1 + "\n");
                     writer.flush();
                     String line11 = br1.readLine();
-                    int1 = checkForNullAsc(line11, int1, int2, writer, br1,br2);
+                    int1 = checkForNullAsc(line11, int1, int2, writer, br1, br2);
                 }
                 while ((int2) != null && (int1) != null && int1 > int2) {
                     writer.write(int2 + "\n");
@@ -33,7 +33,8 @@ public class MergeInteger {
             System.out.println("Problem with files");
         }
     }
-    private Integer checkForNullAsc (String line1, Integer int1, Integer int2, BufferedWriter writer,BufferedReader br1, BufferedReader br2) throws IOException {
+
+    private Integer checkForNullAsc(String line1, Integer int1, Integer int2, BufferedWriter writer, BufferedReader br1, BufferedReader br2) throws IOException {
         try {
             if (line1 != null) {
                 while (line1.contains(" ")) {
@@ -83,7 +84,7 @@ public class MergeInteger {
             String line2 = br2.readLine();
             Integer int1 = null;
             Integer int2 = null;
-            int1 = checkForNullDes(line1, int1, int2, writer, br1,br2);
+            int1 = checkForNullDes(line1, int1, int2, writer, br1, br2);
             int2 = checkForNullDes(line2, int2, int1, writer, br2, br1);
 
             while (int1 != null && int2 != null) {
@@ -91,7 +92,7 @@ public class MergeInteger {
                     writer.write(int1 + "\n");
                     writer.flush();
                     String line11 = br1.readLine();
-                    int1 = checkForNullDes(line11, int1, int2, writer, br1,br2);
+                    int1 = checkForNullDes(line11, int1, int2, writer, br1, br2);
                 }
                 while ((int2) != null && (int1) != null && int1 < int2) {
                     writer.write(int2 + "\n");
@@ -104,7 +105,8 @@ public class MergeInteger {
             System.out.println("Problem with files");
         }
     }
-    private Integer checkForNullDes (String line1, Integer int1, Integer int2, BufferedWriter writer,BufferedReader br1, BufferedReader br2) throws IOException {
+
+    private Integer checkForNullDes(String line1, Integer int1, Integer int2, BufferedWriter writer, BufferedReader br1, BufferedReader br2) throws IOException {
         try {
             if (line1 != null) {
                 while (line1.contains(" ")) {
