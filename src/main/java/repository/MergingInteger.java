@@ -2,9 +2,9 @@ package repository;
 
 import java.io.*;
 
-public class MergeInteger {
+public class MergingInteger {
 
-    public void MergeAscending(File fileName1, File fileName2, File fileName3) {
+    public void mergeAscending(File fileName1, File fileName2, File fileName3) {
         try (BufferedReader br1 = new BufferedReader(new FileReader(fileName1));
              BufferedReader br2 = new BufferedReader(new FileReader(fileName2));
              BufferedWriter writer = new BufferedWriter(new FileWriter(fileName3))) {
@@ -76,7 +76,7 @@ public class MergeInteger {
         return null;
     }
 
-    public void MergeDescending(File fileName1, File fileName2, File fileName3) {
+    public void mergeDescending(File fileName1, File fileName2, File fileName3) {
         try (BufferedReader br1 = new BufferedReader(new FileReader(fileName1));
              BufferedReader br2 = new BufferedReader(new FileReader(fileName2));
              BufferedWriter writer = new BufferedWriter(new FileWriter(fileName3))) {

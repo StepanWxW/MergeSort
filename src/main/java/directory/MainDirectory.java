@@ -1,4 +1,4 @@
-package Directory;
+package directory;
 
 public class MainDirectory {
     public static final String RULE = "Please enter in order:" +
@@ -7,5 +7,5 @@ public class MainDirectory {
             "\n3.) \"-out.txt\" - name of the created file." +
             "\n4.) \"-in.txt\" - name readable filename. There may be several in a row." +
             "\nFor example: " +
-            "-a -s -out.txt -in1.txt -in2.txt -in3.txt";
+            "-a -s out.txt in1.txt in2.txt in3.txt";
 }
